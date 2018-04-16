@@ -34,17 +34,18 @@ subprojects {
             url = "https://oss.sonatype.org/content/repositories/snapshots"
         }
 
+        jcenter()
     }
 
     dependencies {
-
+        compile 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
     }
 
     sourceCompatibility = 1.9
     targetCompatibility = 1.9
 
     tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
-        kotlinOptions.jvmTarget = "1.9"
+        kotlinOptions.jvmTarget = "1.8"
     }
 
     idea {

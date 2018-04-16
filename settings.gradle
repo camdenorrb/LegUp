@@ -1,0 +1,6 @@
+rootProject.name = 'LegUp'
+
+include 'math'
+include 'markup'
+include 'language'
+include 'central'
