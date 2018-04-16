@@ -37,7 +37,7 @@ class ExprLexer(input: String) : LexerBase<String>(input) {
        // valueBuilder.
 
         val token = ExprToken.byIdentifier(it) ?: return@forEach
-        println(token)
+
 
     }
 
