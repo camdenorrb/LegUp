@@ -3,9 +3,9 @@ package me.camdenorrb.legup.central.lexer
 import me.camdenorrb.legup.central.iterator.impl.PeekingCharIterator
 
 
-abstract class Lexer<T : Any>(private val input: String) {
+abstract class LexerBase<T : Any>(private val input: String) {
 
-    private val tokenMap = mutableMapOf<T, MutableList<String>>()
+    private val tokenList = mutableListOf<Pair<T, String>>()
 
 
     var isParsed = false
@@ -15,17 +15,27 @@ abstract class Lexer<T : Any>(private val input: String) {
     // Strips the text of anything that makes it difficult to parse
     protected open fun strip(input: String) = input
 
-    // Collects the tokens to tokenMap
+    // Collects the tokens to tokenList
     protected open fun collect(input: PeekingCharIterator) = Unit
 
+    // Called after collection is done
+    protected open fun afterCollect() = Unit
 
-    // Compiles the tokenMap
-    fun compile() = tokenMap.toList()
+
+
+    // Compiles the tokenList
+    fun compile() = tokenList.toList()
 
 
     // Call this method as you find tokens in the *implementation*
     protected fun found(token: T, value: String) {
-        tokenMap.getOrPut(token, { mutableListOf() }).add(value)
+        tokenList.add(token to value)
+    }
+
+    // Parse + compile
+    fun eval() : List<Pair<T, String>> {
+        parse()
+        return compile()
     }
 
 
@@ -34,6 +44,8 @@ abstract class Lexer<T : Any>(private val input: String) {
         if (isParsed) return
 
         collect(PeekingCharIterator(strip(input)))
+        afterCollect()
+
         isParsed = true
     }
 
