@@ -5,7 +5,7 @@ import me.camdenorrb.legup.central.iterator.impl.PeekingCharIterator
 
 abstract class LexerBase<T : Any>(private val input: String) {
 
-    private val tokenList = mutableListOf<Pair<T, String>>()
+    private val tokenList = mutableListOf<T>()
 
 
     var isParsed = false
@@ -28,12 +28,12 @@ abstract class LexerBase<T : Any>(private val input: String) {
 
 
     // Call this method as you find tokens in the *implementation*
-    protected fun found(token: T, value: String) {
-        tokenList.add(token to value)
+    protected fun found(token: T) {
+        tokenList.add(token)
     }
 
     // Parse + compile
-    fun eval() : List<Pair<T, String>> {
+    operator fun invoke() : List<T> {
         parse()
         return compile()
     }

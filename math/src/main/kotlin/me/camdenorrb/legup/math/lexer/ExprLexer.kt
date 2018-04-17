@@ -2,9 +2,12 @@ package me.camdenorrb.legup.math.lexer
 
 import me.camdenorrb.legup.central.iterator.impl.PeekingCharIterator
 import me.camdenorrb.legup.central.lexer.LexerBase
-import me.camdenorrb.legup.math.token.type.ExprToken
+import me.camdenorrb.legup.math.token.base.TokenBase
+import me.camdenorrb.legup.math.token.impl.NumericToken
+import me.camdenorrb.legup.math.token.impl.OperatorToken
+import me.camdenorrb.legup.math.token.type.ExprTokenType
 
-class ExprLexer(input: String) : LexerBase<String>(input) {
+class ExprLexer(input: String) : LexerBase<TokenBase<Any, Any>>(input) {
 
     private var valueBuilder = ""
 
@@ -12,7 +15,7 @@ class ExprLexer(input: String) : LexerBase<String>(input) {
 
     //private var valueHolder: Number? = null
 
-    private var currentToken: ExprToken? = null
+    //private var currentToken: ExprTokenType? = null
 
 
     override fun strip(input: String) : String {
@@ -20,9 +23,14 @@ class ExprLexer(input: String) : LexerBase<String>(input) {
     }
 
     override fun afterCollect() {
-        valueBuilder = ""
+
+        if (valueBuilder.isNotEmpty()) {
+            found(NumericToken(valueBuilder.parseNumber()))
+            valueBuilder = ""
+        }
+
         //valueHolder = null
-        currentToken = null
+        //currentToken = null
         //isReadingNumber = false
     }
 
@@ -33,11 +41,13 @@ class ExprLexer(input: String) : LexerBase<String>(input) {
             return@forEach
         }
 
+        if (valueBuilder.isNotEmpty()) {
+            found(NumericToken(valueBuilder.parseNumber()))
+            valueBuilder = ""
+        }
 
-       // valueBuilder.
-
-        val token = ExprToken.byIdentifier(it) ?: return@forEach
-
+        val token = ExprTokenType.byIdentifier(it) ?: return@forEach
+        found(OperatorToken(token))
 
     }
 
