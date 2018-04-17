@@ -17,5 +17,4 @@ interface IteratorBase<out T> : Iterator<T> {
         return results
     }
 
-
 }

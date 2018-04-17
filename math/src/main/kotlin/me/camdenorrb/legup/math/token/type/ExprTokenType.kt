@@ -1,72 +1,26 @@
 package me.camdenorrb.legup.math.token.type
 
 
-enum class ExprTokenType(val isOperator: Boolean) {
+enum class ExprTokenType(val symbol: String, val isIdentifier: (Char) -> Boolean = { it == symbol[0] }, val isOperator: Boolean = true) {
 
-    NUMERIC_VALUE(false) {
+    PLUS("+"),
 
-        override fun isIdentifier(char: Char) : Boolean {
-            return char == '.' || char.isDigit()
-        }
+    POWER("^"),
 
-    },
+    EQUALS("="),
 
-    EQUALS(true) {
+    DIVIDE("/"),
 
-        override fun isIdentifier(char: Char) : Boolean {
-            return char == '='
-        }
+    SUBTRACT("-"),
 
-        override fun toString() = "="
-    },
+    MULTIPLY("*"),
 
-    PLUS(true) {
-
-        override fun isIdentifier(char: Char) : Boolean {
-            return char == '+'
-        }
-
-        override fun toString() = "+"
-    },
-
-    SUBTRACT(true) {
-
-        override fun isIdentifier(char: Char) : Boolean {
-            return char == '-'
-        }
-
-        override fun toString() = "-"
-    },
-
-    MULTIPLY(true) {
-
-        override fun isIdentifier(char: Char) : Boolean {
-            return char == '*'
-        }
-
-        override fun toString() = "*"
-    },
-
-    DIVIDE(true) {
-
-        override fun isIdentifier(char: Char) : Boolean {
-            return char == '/'
-        }
-
-        override fun toString() = "/"
-    },
-
-    POWER(true) {
-
-        override fun isIdentifier(char: Char) : Boolean {
-            return char == '^'
-        }
-
-        override fun toString() = "^"
-    };
+    NUMERIC_VALUE("", { it == '.' || it.isDigit() }, false);
 
 
-    abstract fun isIdentifier(char: Char) : Boolean
+    override fun toString(): String {
+        return symbol
+    }
 
 
     companion object {

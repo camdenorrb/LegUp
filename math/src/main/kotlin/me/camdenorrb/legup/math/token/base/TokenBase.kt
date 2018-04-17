@@ -1,6 +1,6 @@
 package me.camdenorrb.legup.math.token.base
 
-// Might not be needed.
+// Might move to central.
 interface TokenBase<out T : Any, out V : Any> {
 
     val type: T

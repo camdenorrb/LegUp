@@ -47,8 +47,6 @@ class ExprLexer(input: String) : LexerBase<TokenBase<Any, Any>>(input) {
         }
 
         found(OperatorToken(token))
-
-
     }
 
 

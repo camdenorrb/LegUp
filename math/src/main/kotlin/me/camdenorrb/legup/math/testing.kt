@@ -9,6 +9,13 @@ import java.io.File
 fun main(args: Array<String>) {
 
     val testFile = File("math/src/main/resources/example.txt")
+
     println(ExprLexer(testFile.readText()).invoke())
+    /*var totalTime = 0
+
+    repeat(10_000_000) {
+
+        ExprLexer(testFile.readText()).invoke()
+    }*/
 
 }
