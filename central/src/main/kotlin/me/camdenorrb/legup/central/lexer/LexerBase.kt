@@ -5,7 +5,7 @@ import me.camdenorrb.legup.central.iterator.impl.PeekingCharIterator
 
 abstract class LexerBase<T : Any>(private val input: String) {
 
-    private val tokenList = mutableListOf<T>()
+    protected val tokenList = mutableListOf<T>()
 
 
     var isParsed = false

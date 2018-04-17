@@ -1,9 +1,9 @@
 package me.camdenorrb.legup.math.token.type
 
 
-enum class ExprTokenType {
+enum class ExprTokenType(val isOperator: Boolean) {
 
-    NUMERIC_VALUE {
+    NUMERIC_VALUE(false) {
 
         override fun isIdentifier(char: Char) : Boolean {
             return char == '.' || char.isDigit()
@@ -11,7 +11,7 @@ enum class ExprTokenType {
 
     },
 
-    EQUALS {
+    EQUALS(true) {
 
         override fun isIdentifier(char: Char) : Boolean {
             return char == '='
@@ -20,7 +20,7 @@ enum class ExprTokenType {
         override fun toString() = "="
     },
 
-    PLUS {
+    PLUS(true) {
 
         override fun isIdentifier(char: Char) : Boolean {
             return char == '+'
@@ -29,7 +29,7 @@ enum class ExprTokenType {
         override fun toString() = "+"
     },
 
-    SUBTRACT {
+    SUBTRACT(true) {
 
         override fun isIdentifier(char: Char) : Boolean {
             return char == '-'
@@ -38,7 +38,7 @@ enum class ExprTokenType {
         override fun toString() = "-"
     },
 
-    MULTIPLY {
+    MULTIPLY(true) {
 
         override fun isIdentifier(char: Char) : Boolean {
             return char == '*'
@@ -47,7 +47,7 @@ enum class ExprTokenType {
         override fun toString() = "*"
     },
 
-    DIVIDE {
+    DIVIDE(true) {
 
         override fun isIdentifier(char: Char) : Boolean {
             return char == '/'
@@ -56,7 +56,7 @@ enum class ExprTokenType {
         override fun toString() = "/"
     },
 
-    POWER {
+    POWER(true) {
 
         override fun isIdentifier(char: Char) : Boolean {
             return char == '^'

@@ -10,8 +10,8 @@ class OperatorToken(override val type: ExprTokenType) : TokenBase<ExprTokenType,
 
 
     init {
-        check(type != ExprTokenType.NUMERIC_VALUE) {
-            "You can't create an operator token of a Numeric Value!"
+        check(type.isOperator) {
+            "You cannot create an operator token of a non-operator type!"
         }
     }
 

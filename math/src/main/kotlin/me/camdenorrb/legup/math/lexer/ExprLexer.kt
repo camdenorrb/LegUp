@@ -11,12 +11,6 @@ class ExprLexer(input: String) : LexerBase<TokenBase<Any, Any>>(input) {
 
     private var valueBuilder = ""
 
-    //private var isReadingNumber = false
-
-    //private var valueHolder: Number? = null
-
-    //private var currentToken: ExprTokenType? = null
-
 
     override fun strip(input: String) : String {
         return input.replace(" ", "")
@@ -29,9 +23,9 @@ class ExprLexer(input: String) : LexerBase<TokenBase<Any, Any>>(input) {
             valueBuilder = ""
         }
 
-        //valueHolder = null
-        //currentToken = null
-        //isReadingNumber = false
+        check(tokenList.last() !is OperatorToken) {
+            "The expression cannot end with an operator!"
+        }
     }
 
     override fun collect(input: PeekingCharIterator) = input.forEach {
@@ -47,36 +41,31 @@ class ExprLexer(input: String) : LexerBase<TokenBase<Any, Any>>(input) {
         }
 
         val token = ExprTokenType.byIdentifier(it) ?: return@forEach
+
+        check(tokenList.last() !is OperatorToken) {
+            "Cannot have 2 operators side by side!"
+        }
+
         found(OperatorToken(token))
+
 
     }
 
+
+    fun eval() : Number {
+
+        var isDouble = false
+
+        return TODO("Implement later")
+    }
+
+    fun asPostFix() : List<TokenBase<Any, Any>> {
+        return TODO("Implement later")
+    }
+
+
     private fun String.parseNumber() : Number {
-
-        if (contains('.')) {
-
-            val testValue = this.toDouble()
-
-            if (testValue >= Float.MIN_VALUE && testValue <= Float.MAX_VALUE) {
-                return testValue.toFloat()
-            }
-
-            return testValue
-        }
-
-        else {
-
-            val testValue = this.toLong()
-
-            return when (testValue) {
-                in Byte.MIN_VALUE..Byte.MAX_VALUE -> testValue.toByte()
-                in Short.MIN_VALUE..Short.MAX_VALUE -> testValue.toShort()
-                in Int.MIN_VALUE..Int.MAX_VALUE -> testValue.toInt()
-                else -> testValue
-            }
-
-        }
-
+        return if (this.contains('.')) this.toDouble() else this.toLong()
     }
 
 }
