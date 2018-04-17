@@ -1,7 +1,7 @@
 package me.camdenorrb.legup.math.token.type
 
 
-enum class ExprTokenType(val symbol: String, val isIdentifier: (Char) -> Boolean = { it == symbol[0] }, val isOperator: Boolean = true) {
+enum class ExprTokenType(val symbol: String, val isOperator: Boolean = true, val isIdentifier: (Char) -> Boolean = { it == symbol[0] }) {
 
     PLUS("+"),
 
@@ -15,7 +15,8 @@ enum class ExprTokenType(val symbol: String, val isIdentifier: (Char) -> Boolean
 
     MULTIPLY("*"),
 
-    NUMERIC_VALUE("", { it == '.' || it.isDigit() }, false);
+
+    NUMERIC_VALUE("", false, { it == '.' || it.isDigit() });
 
 
     override fun toString(): String {

@@ -6,6 +6,7 @@ import me.camdenorrb.legup.math.token.base.TokenBase
 import me.camdenorrb.legup.math.token.impl.NumericToken
 import me.camdenorrb.legup.math.token.impl.OperatorToken
 import me.camdenorrb.legup.math.token.type.ExprTokenType
+import me.camdenorrb.legup.math.token.type.ExprTokenType.NUMERIC_VALUE
 
 class ExprLexer(input: String) : LexerBase<TokenBase<Any, Any>>(input) {
 
@@ -30,7 +31,7 @@ class ExprLexer(input: String) : LexerBase<TokenBase<Any, Any>>(input) {
 
     override fun collect(input: PeekingCharIterator) = input.forEach {
 
-        if (it.isDigit() || it == '.') {
+        if (NUMERIC_VALUE.isIdentifier(it)) {
             valueBuilder += it
             return@forEach
         }
@@ -56,7 +57,7 @@ class ExprLexer(input: String) : LexerBase<TokenBase<Any, Any>>(input) {
 
         return TODO("Implement later")
     }
-
+    
     fun asPostFix() : List<TokenBase<Any, Any>> {
         return TODO("Implement later")
     }
