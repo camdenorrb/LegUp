@@ -1,33 +1,46 @@
 package me.camdenorrb.legup.math.token.type
 
 
-enum class ExprTokenType(val symbol: String, val isOperator: Boolean = true, val isIdentifier: (Char) -> Boolean = { it == symbol[0] }) {
+enum class ExprTokenType(val symbol: String, val isOperator: Boolean = true) {
 
     PLUS("+"),
-
-    POWER("^"),
-
-    EQUALS("="),
-
-    DIVIDE("/"),
-
     SUBTRACT("-"),
 
     MULTIPLY("*"),
+    DIVIDE("/"),
+
+    EXPONENT("^"),
+
+    PARENTHESIS("") {
+
+        override fun isIdentifier(input: String) : Boolean {
+            return input == "(" || input == ")"
+        }
+
+    },
+
+    EQUALS("="),
 
 
-    NUMERIC_VALUE("", false, { it == '.' || it.isDigit() });
+    NUMERIC_VALUE("", false) {
+
+        override fun isIdentifier(input: String) : Boolean {
+            return input == "." || input.toIntOrNull() != null
+        }
+
+    };
 
 
-    override fun toString(): String {
-        return symbol
-    }
+    // Might turn input back to Char
+    open fun isIdentifier(input: String) = input == symbol
+
+    override fun toString() = symbol
 
 
     companion object {
 
-        fun byIdentifier(char: Char) : ExprTokenType? {
-            return values().find { it.isIdentifier(char) }
+        fun byIdentifier(input: String) : ExprTokenType? {
+            return values().find { it.isIdentifier(input) }
         }
 
     }

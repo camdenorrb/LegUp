@@ -1,6 +1,9 @@
 package me.camdenorrb.legup.math
 
-import me.camdenorrb.legup.math.lexer.ExprLexer
+import me.camdenorrb.legup.math.ext.isPostFix
+import me.camdenorrb.legup.math.token.impl.NumericToken
+import me.camdenorrb.legup.math.token.impl.OperatorToken
+import me.camdenorrb.legup.math.token.type.ExprTokenType
 import java.io.File
 
 
@@ -10,12 +13,19 @@ fun main(args: Array<String>) {
 
     val testFile = File("math/src/main/resources/example.txt")
 
-    println(ExprLexer(testFile.readText()).invoke())
-    /*var totalTime = 0
+    println(listOf(NumericToken(1), NumericToken(2), NumericToken(3), OperatorToken(ExprTokenType.PLUS), OperatorToken(ExprTokenType.PLUS)).isPostFix())
 
-    repeat(10_000_000) {
+    //println(ExprLexer(testFile.readText()).invoke().isPostFix())
 
-        ExprLexer(testFile.readText()).invoke()
-    }*/
+    /*
+    val text = testFile.readText()
+
+    val totalTime = measureTimeMillis {
+        repeat(10_000_000) {
+            ExprLexer(text).invoke()
+        }
+    }
+
+    println("TOTAL: $totalTime, Average: ${totalTime / 10_000_000}")*/
 
 }
