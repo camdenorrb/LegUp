@@ -31,7 +31,9 @@ class ExprLexer(input: String) : LexerBase<ExprTokenBase>(input) {
 
     override fun collect(input: PeekingCharIterator) = input.forEach {
 
-        if (NUMERIC_VALUE.isIdentifier(it.toString())) {
+        val token = ExprTokenType.byIdentifier(it.toString()) ?: return@forEach
+        
+        if (token is NumericToken) {
             valueBuilder += it
             return@forEach
         }
@@ -40,8 +42,6 @@ class ExprLexer(input: String) : LexerBase<ExprTokenBase>(input) {
             found(NumericToken(valueBuilder.parseNumber()))
             valueBuilder = ""
         }
-
-        val token = ExprTokenType.byIdentifier(it.toString()) ?: return@forEach
 
         check(tokenList.last() !is OperatorToken) {
             "Cannot have 2 operators side by side!"
@@ -53,6 +53,7 @@ class ExprLexer(input: String) : LexerBase<ExprTokenBase>(input) {
 
 
 
+    // TODO: Make this a package level extension
     private fun String.parseNumber() : Number {
         return if (this.contains('.')) this.toDouble() else this.toLong()
     }
