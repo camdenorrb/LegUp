@@ -5,8 +5,8 @@ import me.camdenorrb.legup.central.lexer.LexerBase
 import me.camdenorrb.legup.math.token.base.ExprTokenBase
 import me.camdenorrb.legup.math.token.impl.NumericToken
 import me.camdenorrb.legup.math.token.impl.OperatorToken
+import me.camdenorrb.legup.math.token.impl.ParenthesisToken
 import me.camdenorrb.legup.math.token.type.ExprTokenType
-import me.camdenorrb.legup.math.token.type.ExprTokenType.NUMERIC_VALUE
 
 class ExprLexer(input: String) : LexerBase<ExprTokenBase>(input) {
 
@@ -33,7 +33,7 @@ class ExprLexer(input: String) : LexerBase<ExprTokenBase>(input) {
 
         val token = ExprTokenType.byIdentifier(it.toString()) ?: return@forEach
         
-        if (token is NumericToken) {
+        if (token == ExprTokenType.NUMERIC_VALUE) {
             valueBuilder += it
             return@forEach
         }
@@ -43,14 +43,17 @@ class ExprLexer(input: String) : LexerBase<ExprTokenBase>(input) {
             valueBuilder = ""
         }
 
-        check(tokenList.last() !is OperatorToken) {
+        if (ParenthesisToken.isThis(token)) {
+            found(ParenthesisToken(token))
+            return@forEach
+        }
+
+        check(tokenList.lastOrNull() !is OperatorToken) {
             "Cannot have 2 operators side by side!"
         }
 
         found(OperatorToken(token))
     }
-
-
 
 
     // TODO: Make this a package level extension

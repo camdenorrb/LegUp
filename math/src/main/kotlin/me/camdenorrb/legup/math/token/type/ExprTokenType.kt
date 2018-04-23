@@ -1,28 +1,23 @@
 package me.camdenorrb.legup.math.token.type
 
 
-enum class ExprTokenType(val symbol: String, val isOperator: Boolean = true) {
+enum class ExprTokenType(val priority: Int, val symbol: String, val isOperator: Boolean = true) {
 
-    PLUS("+"),
-    SUBTRACT("-"),
+    PLUS(0, "+"),
+    SUBTRACT(0, "-"),
 
-    MULTIPLY("*"),
-    DIVIDE("/"),
+    MULTIPLY(1, "*"),
+    DIVIDE(1, "/"),
 
-    EXPONENT("^"),
+    EXPONENT(2, "^"),
 
-    PARENTHESIS("") {
+    PARENTHESIS_OPEN(3, "(", false),
+    PARENTHESIS_CLOSE(3, ")", false),
 
-        override fun isIdentifier(input: String) : Boolean {
-            return input == "(" || input == ")"
-        }
-
-    },
-
-    EQUALS("="),
+    EQUALS(4, "=", false),
 
 
-    NUMERIC_VALUE("", false) {
+    NUMERIC_VALUE(5, "", false) {
 
         override fun isIdentifier(input: String) : Boolean {
             return input == "." || input.toIntOrNull() != null

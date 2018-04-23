@@ -18,4 +18,13 @@ class OperatorToken(override val type: ExprTokenType) : ExprTokenBase {
 
     override fun toString() = value
 
+
+    companion object {
+
+        fun isThis(type: ExprTokenType) : Boolean {
+            return type.isOperator
+        }
+
+    }
+
 }

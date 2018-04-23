@@ -1,9 +1,7 @@
 package me.camdenorrb.legup.math
 
-import me.camdenorrb.legup.math.ext.isPostFix
-import me.camdenorrb.legup.math.token.impl.NumericToken
-import me.camdenorrb.legup.math.token.impl.OperatorToken
-import me.camdenorrb.legup.math.token.type.ExprTokenType
+import me.camdenorrb.legup.math.ext.asPostFix
+import me.camdenorrb.legup.math.lexer.ExprLexer
 import java.io.File
 
 
@@ -13,9 +11,9 @@ fun main(args: Array<String>) {
 
     val testFile = File("math/src/main/resources/example.txt")
 
-    println(listOf(NumericToken(1), NumericToken(2), NumericToken(3), OperatorToken(ExprTokenType.PLUS), OperatorToken(ExprTokenType.PLUS)).isPostFix())
+    //println(listOf(NumericToken(1), OperatorToken(ExprTokenType.MULTIPLY), NumericToken(2), NumericToken(3), OperatorToken(ExprTokenType.PLUS)).asPostFix())
 
-    //println(ExprLexer(testFile.readText()).invoke().isPostFix())
+    println(ExprLexer(testFile.readText()).invoke().asPostFix())
 
     /*
     val text = testFile.readText()
