@@ -7,36 +7,40 @@ interface PeekingIteratorBase<out T> : IteratorBase<T> {
     fun peek(index: Int = 0) : T?
 
 
-    // Peek the addition of the current index and the provided
-    fun peekNext(index: Int = 1) : T?
+    // Peek the addition of the next index and the provided
+    fun peekNext(add: Int = 0) : T?
 
-    // Peek the subtraction of the current index and the provided
-    fun peekBehind(index: Int = 1) : T?
+    // Peek the subtraction of the next index and the provided
+    fun peekBehind(sub: Int = 0) : T?
 
 
     // Peeks next until either the predicate returns false or the collection is exhausted
-    fun peekNextUntil(predicate: (T) -> Boolean) : List<T> {
+    fun peekNextUntil(until: (T) -> Boolean) : List<T> {
 
         var value = peekNext() ?: return emptyList()
         val results = mutableListOf<T>()
 
-        while (predicate(value)) {
+        var add = 1
+
+        while (!until(value)) {
             results.add(value)
-            value = peekNext() ?: break
+            value = peekNext(add++) ?: break
         }
 
         return results
     }
 
     // Peeks behind until either the predicate returns false or the collection is exhausted
-    fun peekBehindUntil(predicate: (T) -> Boolean) : List<T> {
+    fun peekBehindUntil(until: (T) -> Boolean) : List<T> {
 
         var value = peekBehind() ?: return emptyList()
         val results = mutableListOf<T>()
 
-        while (predicate(value)) {
+        var sub = 1
+
+        while (!until(value)) {
             results.add(value)
-            value = peekBehind() ?: break
+            value = peekBehind(sub++) ?: break
         }
 
         return results

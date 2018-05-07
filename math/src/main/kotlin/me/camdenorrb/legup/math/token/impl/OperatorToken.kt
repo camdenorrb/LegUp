@@ -1,9 +1,7 @@
 package me.camdenorrb.legup.math.token.impl
 
-import me.camdenorrb.legup.math.token.base.ExprTokenBase
-import me.camdenorrb.legup.math.token.type.ExprTokenType
 
-
+/*
 class OperatorToken(override val type: ExprTokenType) : ExprTokenBase {
 
     override val value = type.toString()
@@ -28,3 +26,4 @@ class OperatorToken(override val type: ExprTokenType) : ExprTokenBase {
     }
 
 }
+*/

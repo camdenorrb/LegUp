@@ -5,18 +5,24 @@ import me.camdenorrb.legup.central.iterator.base.PeekingIteratorBase
 
 class PeekingArrayIterator<out T>(private val input: Array<T>) : PeekingIteratorBase<T> {
 
-    var currentIndex = 0
+    var nextIndex = 0
 
 
-    override fun next() = input[currentIndex++]
+    override fun next() = input[nextIndex++]
 
-    override fun hasNext() = currentIndex < input.size
+    override fun hasNext() = nextIndex < input.size
 
 
     override fun peek(index: Int) = input.getOrNull(index)
 
-    override fun peekNext(index: Int) = input.getOrNull(currentIndex + index)
+    override fun peekNext(add: Int) = input.getOrNull(nextIndex + add)
 
-    override fun peekBehind(index: Int) = input.getOrNull(currentIndex - index)
+    override fun peekBehind(sub: Int) = input.getOrNull(nextIndex - sub)
+
+
+    override fun skip(amount: Int) {
+        nextIndex += amount
+        nextIndex = nextIndex.coerceAtMost(input.size)
+    }
 
 }

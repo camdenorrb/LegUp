@@ -34,13 +34,13 @@ abstract class LexerBase<T : Any>(private val input: String) {
 
     // Parse + compile
     operator fun invoke() : List<T> {
-        parse()
+        lex()
         return compile()
     }
 
 
     // Attempts to parse through the provided text to find tokens
-    fun parse() {
+    fun lex() {
         if (isParsed) return
 
         collect(PeekingCharIterator(strip(input)))

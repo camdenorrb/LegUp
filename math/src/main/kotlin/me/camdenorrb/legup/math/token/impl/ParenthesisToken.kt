@@ -1,18 +1,14 @@
 package me.camdenorrb.legup.math.token.impl
 
-import me.camdenorrb.legup.math.token.base.ExprTokenBase
-import me.camdenorrb.legup.math.token.type.ExprTokenType
-import me.camdenorrb.legup.math.token.type.ExprTokenType.PARENTHESIS_CLOSE
-import me.camdenorrb.legup.math.token.type.ExprTokenType.PARENTHESIS_OPEN
 
-
+/*
 class ParenthesisToken(override val type: ExprTokenType) : ExprTokenBase {
 
     override val value = type.toString()
 
 
     init {
-        check(type == PARENTHESIS_OPEN || type == PARENTHESIS_CLOSE) {
+        check(type == PAREN_L || type == PAREN_R) {
             "You cannot create a parenthesis token of a non-parenthesis type!"
         }
     }
@@ -24,9 +20,10 @@ class ParenthesisToken(override val type: ExprTokenType) : ExprTokenBase {
     companion object {
 
         fun isThis(type: ExprTokenType) : Boolean {
-            return type == PARENTHESIS_OPEN || type == PARENTHESIS_CLOSE
+            return type == PAREN_L || type == PAREN_R
         }
 
     }
 
 }
+*/

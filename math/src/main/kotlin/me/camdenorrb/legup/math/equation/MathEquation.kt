@@ -1,13 +1,12 @@
 package me.camdenorrb.legup.math.equation
 
-import me.camdenorrb.legup.math.ext.asPostFix
 import me.camdenorrb.legup.math.lexer.ExprLexer
 import me.camdenorrb.legup.math.token.base.ExprTokenBase
 
 
 class MathEquation(val input: List<ExprTokenBase>) {
     
-    val postfix by lazy { input.asPostFix() }
+    /*val postfix by lazy { input.asPostFix() }*/
 
     
     constructor(input: String) : this(ExprLexer(input))

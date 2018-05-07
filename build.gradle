@@ -5,7 +5,7 @@ buildscript {
 
     ext {
         versionShadow = '2.0.3'
-        versionKotlin = '1.2.31'
+        versionKotlin = '1.2.41'
     }
 
     repositories {

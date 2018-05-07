@@ -18,8 +18,14 @@ class PeekingCharIterator(private val input: CharArray) : PeekingIteratorBase<Ch
 
     override fun peek(index: Int) = input.getOrNull(index)
 
-    override fun peekNext(index: Int) = input.getOrNull(currentIndex + index)
+    override fun peekNext(add: Int) = input.getOrNull(currentIndex + add)
 
-    override fun peekBehind(index: Int) = input.getOrNull(currentIndex - index)
+    override fun peekBehind(sub: Int) = input.getOrNull(currentIndex - sub)
+
+
+    override fun skip(amount: Int) {
+        currentIndex += amount
+        currentIndex = currentIndex.coerceAtMost(input.size)
+    }
 
 }

@@ -1,11 +1,7 @@
 package me.camdenorrb.legup.math.ext
 
-import me.camdenorrb.legup.math.token.base.ExprTokenBase
-import me.camdenorrb.legup.math.token.impl.OperatorToken
-import me.camdenorrb.legup.math.token.impl.ParenthesisToken
-
 // Move this to MathEquation class which'll handle types
-fun <T : Iterable<ExprTokenBase>> T.solve() : Number {
+/*fun <T : Iterable<ExprTokenBase>> T.solve() : Number {
 
     check(isPostFix()) {
         "Can't solve a non-postfix expression!"
@@ -15,10 +11,11 @@ fun <T : Iterable<ExprTokenBase>> T.solve() : Number {
 
 
     return TODO("Implement later")
-}
+}*/
 
 
-fun <X : Any, T : Iterable<X>> T.splitBy(shouldSplit: (X) -> Boolean): List<List<X>> {
+
+fun <X : Any, T : Iterable<X>> T.splitBy(shouldSplit: (X) -> Boolean) : List<List<X>> {
 
     var builder = mutableListOf<X>()
     val result = mutableListOf<List<X>>()
@@ -43,6 +40,7 @@ fun <X : Any, T : Iterable<X>> T.splitBy(shouldSplit: (X) -> Boolean): List<List
 // [[2, +], [2 - 2]]
 // 2 2 2 -+
 
+/*
 fun <T : Iterable<ExprTokenBase>> T.asPostFix() : List<ExprTokenBase> {
 
     val inputs = this.splitBy { it is ParenthesisToken }
@@ -50,7 +48,6 @@ fun <T : Iterable<ExprTokenBase>> T.asPostFix() : List<ExprTokenBase> {
     println(inputs)
 
 
-     
     /*
     val test = inputs.map {
 
@@ -92,7 +89,7 @@ fun <T : Iterable<ExprTokenBase>> T.asPostFix() : List<ExprTokenBase> {
         println(holder)
         holder
     }
-    */
+
 
     println(test)
     // Finish check
@@ -103,10 +100,10 @@ fun <T : Iterable<ExprTokenBase>> T.asPostFix() : List<ExprTokenBase> {
     println(test.isPostFix())
 
     return test
-}
+}*/
 
 
-fun <T : Iterable<ExprTokenBase>> T.isPostFix() : Boolean {
+/*fun <T : Iterable<ExprTokenBase>> T.isPostFix() : Boolean {
 
     if (!last().type.isOperator) return false
 
@@ -119,4 +116,4 @@ fun <T : Iterable<ExprTokenBase>> T.isPostFix() : Boolean {
     }
 
     return temp == 0
-}
+}*/
