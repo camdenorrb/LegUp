@@ -1,21 +1,23 @@
 package me.camdenorrb.legup.math.token.type
 
-enum class ExprTokenType {
+/*
+enum class ExprTokenType(val identifier: String) {
 
-    ADD,
-    SUB,
+    ADD("+"),
+    SUB("-"),
 
-    MUL,
-    DIV,
+    MUL("*"),
+    DIV("/"),
 
-    EXP,
+    EXP("^"),
 
-    PAREN_L,
-    PAREN_R,
+    PAREN_L("("),
+    PAREN_R(")"),
 
-    EQUALS,
+    EQUALS("="),
 
-    NUMBER;
+    SYMBOL(""),
+    NUMBER("");
 
 
     // Might turn input back to Char
@@ -33,4 +35,4 @@ enum class ExprTokenType {
 
     }*/
 
-}
+}*/

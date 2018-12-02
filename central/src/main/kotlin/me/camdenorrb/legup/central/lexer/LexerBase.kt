@@ -2,7 +2,6 @@ package me.camdenorrb.legup.central.lexer
 
 import me.camdenorrb.legup.central.iterator.impl.PeekingCharIterator
 
-
 abstract class LexerBase<T : Any>(private val input: String) {
 
     protected val tokenList = mutableListOf<T>()
@@ -23,8 +22,8 @@ abstract class LexerBase<T : Any>(private val input: String) {
 
 
 
-    // Compiles the tokenList
-    fun compile() = tokenList.toList()
+    // Public access to tokenList
+    fun tokenList() = tokenList.toList()
 
 
     // Call this method as you find tokens in the *implementation*
@@ -32,10 +31,10 @@ abstract class LexerBase<T : Any>(private val input: String) {
         tokenList.add(token)
     }
 
-    // Parse + compile
+    // Parse + returns tokens
     operator fun invoke() : List<T> {
         lex()
-        return compile()
+        return tokenList
     }
 
 

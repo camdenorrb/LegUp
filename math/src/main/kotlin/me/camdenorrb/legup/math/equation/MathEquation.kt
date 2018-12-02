@@ -1,10 +1,10 @@
 package me.camdenorrb.legup.math.equation
 
 import me.camdenorrb.legup.math.lexer.ExprLexer
-import me.camdenorrb.legup.math.token.base.ExprTokenBase
+import me.camdenorrb.legup.math.token.impl.ExprToken
 
 
-class MathEquation(val input: List<ExprTokenBase>) {
+class MathEquation(val input: List<ExprToken<out Any>>) {
     
     /*val postfix by lazy { input.asPostFix() }*/
 
